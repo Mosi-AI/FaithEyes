@@ -1,0 +1,19 @@
+tools:
+  - class_name: "verl.tools.vlm_subagent_tool.VLMSubAgentTool"
+    config:
+      num_workers: 8
+      rate_limit: 8
+      timeout: 60
+      type: native
+    tool_schema:
+      type: "function"
+      function:
+        name: "vlm_coding"
+        description: "Writing executable Python code to perform image manipulations or calculation for better reasoning."
+        parameters:
+          type: "object"
+          properties:
+            code_str:
+              type: "string"
+              description: "The python code for image manipulations or calculation."
+          required: ["code_str"]
