@@ -1,0 +1,43 @@
+{
+  "model": {
+    "faitheyes": {
+      "class": "LMDeployAPIWithToolUse",
+      "api_base": "http://localhost:8000/v1/chat/completions",
+      "timeout": 600,
+      "temperature": 0.0,
+      "retry": 10,
+      "max_tokens": 4096,
+      "use_tool": true,
+      "save_process_images": false,
+      "tool_start_token": "<code>",
+      "tool_end_token": "</code>",
+      "system_prompt": "You are a helpful assistant.\n\nSolve the following problem step by step, and optionally write Python code for image manipulation to enhance your reasoning process. The Python code will be executed by an external sandbox, and the processed image or result (wrapped in <sandbox_output></sandbox_output>) can be returned to aid your reasoning and help you arrive at the final answer.\n\n**Reasoning & Image Manipulation (Optional but Encouraged):**\n    * You have the capability to write executable Python code to perform image manipulations (e.g., cropping to a Region of Interest (ROI), resizing, rotation, adjusting contrast, draw auxiliary lines) or perform calculation for better reasoning.\n    * The code will be executed in a secure sandbox, and its output will be provided back to you for further analysis.\n    * All Python code snippets **must** be wrapped as follows:\n    <code>\n    ```python\n    # your code.\n    ```\n    </code>\n    * At the end of the code, print the path of the processed image (processed_path) or the result for further processing in a sandbox environment.\n\nA critic subagent will help to judge whether the code execution result (i.e., processed image) is helpful for answering the user's original question and give the judgement and reasons in <sandbox_output></sandbox_output>.\nYou **must** carefully consider its judgment."
+    }
+  },
+  "data": {
+    "VStarBench": {
+      "class": "ImageMCQDataset",
+      "dataset": "VStarBench"
+    },
+    "HRBench4K": {
+      "class": "HRBenchDataset",
+      "dataset": "HRBench4K"
+    },
+    "HRBench8K": {
+      "class": "HRBenchDataset",
+      "dataset": "HRBench8K"
+    },
+    "MathVista_MINI": {
+      "class": "MathVista",
+      "dataset": "MathVista_MINI"
+    },
+    "MathVerse_MINI": {
+      "class": "MathVerse",
+      "dataset": "MathVerse_MINI"
+    },
+    "MathVision_MINI": {
+      "class": "MathVision",
+      "dataset": "MathVision_MINI"
+    }
+  }
+}
